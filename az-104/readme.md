@@ -2,38 +2,83 @@
 
 [Study guide for Exam AZ-104: Microsoft Azure Administrator](https://learn.microsoft.com/certifications/resources/study-guides/az-104)
 
-## Azure Onboard-o-Matic (Manage Azure identities and governance)
-Automate the onboarding process of new employees into the organization's Azure AD and Azure resources. This would involve creating user accounts, assigning necessary roles, and providing access to required Azure resources.
+## Onboard Automator (Manage Azure identities and governance)
+Streamline and automate the process of onboarding a new employee into Azure AD and assigning necessary Azure resources.
+
 - **Programming required?**: ❌
 - **Azure Services Used:**
-    - Microsoft Azure Active Directory (Azure AD)
-    - Azure Policy
-    - Azure Resource Groups
-    - Azure Management Groups
-- **Steps:**
-   1. Set up a new Azure AD instance or use an existing one.
-   2. Configure automated user account creation in Azure AD using Azure AD capabilities.
-   3. Set up Azure AD groups and assign users to these groups based on roles.
-   4. Use Azure Policy to define and enforce organization-specific requirements.
-   5. Automate role assignment based on the user's department or position using Azure AD.
-   6. Test the onboarding process by adding a new mock employee.
-   7. Use Azure Monitor to oversee and log the onboarding activities.
+  - Azure AD
+  - Azure Logic Apps
+  - Azure Email Service (part of Logic Apps connector)
+  - Azure Resource Manager
+  
+- **Steps**:
+   1. **Azure AD Setup**:
+        - Set up a new Azure AD instance (if not already present) using the Azure portal.
+   
+   2. **Logic App Workflow Design**:
+        - Design a Logic App workflow triggered by an event (like an entry in a SharePoint list or an email to a specific mailbox) indicating a new employee hire.
+   
+   3. **Azure AD User Creation**:
+        - Use the Azure AD connector in Logic Apps to automatically create a new user in Azure AD based on the trigger event's details.
+   
+   4. **Role and Group Assignment**:
+        - Assign predefined roles and groups to the new user based on the job position or department indicated in the trigger.
+   
+   5. **Resource Provisioning**:
+        - Use the Azure Resource Manager connector in Logic Apps to provision any necessary Azure resources for the user (like VMs or specific permissions).
+   
+   6. **Welcome Email**:
+        - Leverage the Email connector in Logic Apps to send a welcome email to the new hire with instructions and necessary access details.
+   
+   7. **Monitoring and Review**:
+        - Monitor and review the onboarding process through Logic Apps runs history and Azure AD logs to ensure smooth operations.
+
 
 ---
 
 ## ShareSafely - File Share Web App (Implement and manage storage)
-Design a web app where users can upload files to Azure Blob Storage and get a shareable link with controlled access and expiration time.
-- **Programming required?**: ✅
+Create a web application where users can securely upload files to Azure Blob Storage. Once uploaded, the application generates a unique, time-limited link for the user to share. This ensures that only authorized users with the link can access the uploaded file for a specified duration.
+
+- **Programming required?**: ✅ (For creating the web application and generating unique time-limited links.)
 - **Azure Services Used:**
-    - Azure Blob Storage
-    - Azure Storage Accounts
-    - Azure App Service
-- **Steps:**
-   1. Create a new Storage Account and a Blob container.
-   2. Design and code a web application with file upload capabilities.
-   3. Integrate the web app with Azure Blob Storage to save the uploaded files.
-   4. Generate and provide users with a link constructed with Shared Access Signature (SAS) tokens for time-limited file access.
-   5. Deploy the web application on Azure App Service.
+  - Azure Blob Storage
+  - Azure Web Apps
+  - Azure SQL Database
+  - Azure Key Vault
+  - Azure Functions
+  
+- **Steps**:
+   1. **Storage Setup**:
+        - Set up an Azure Blob Storage account and create a container to store the uploaded files.
+        - Configure appropriate security settings, ensuring data at rest encryption is enabled.
+   
+   2. **Web Application Deployment**:
+        - Develop a web application that allows users to upload files. This can be done using preferred frameworks (like ASP.NET Core, Node.js, etc.).
+        - Deploy the application to Azure Web Apps.
+   
+   3. **File Upload Logic**:
+        - In the web application, integrate Azure Blob Storage SDKs/APIs to facilitate the file upload process directly to Blob Storage.
+   
+   4. **Database Integration**:
+        - Create an Azure SQL Database to store metadata of uploaded files, including the original filename, upload timestamp, unique link, and expiration date.
+        - From the web application, upon each file upload, store this metadata in the Azure SQL Database.
+   
+   5. **Unique Link Generation**:
+        - When a file is uploaded, use Azure Functions to generate a unique, time-limited link for the user.
+        - Save this link and its expiration time in the Azure SQL Database.
+   
+   6. **File Retrieval**:
+        - When the unique link is accessed, the web app checks the Azure SQL Database for validity and expiration.
+        - If valid and not expired, the web app facilitates the file download from Azure Blob Storage.
+   
+   7. **Secure Credentials**:
+        - Store any sensitive credentials or configuration strings (like Blob Storage access keys) securely in Azure Key Vault.
+        - Integrate Azure Key Vault with the web application to retrieve these credentials when needed.
+   
+   8. **Monitoring and Cleanup**:
+        - Set up monitoring to track file upload/download activities.
+        - Use Azure Functions or Logic Apps to periodically clean up expired files from both Azure Blob Storage and the Azure SQL Database.
 
 ---
 
@@ -124,77 +169,56 @@ Design a hybrid networking environment where on-premises networks connect secure
 
 ---
 
-## Azure InsightScape (Monitor and maintain Azure resources)
-Get a complete picture of your Azure environment by setting up a comprehensive monitoring and alerting system. This project will centralize the monitoring of all your previous projects, providing a holistic view of resources, performance metrics, alerts, and health statuses.
+## Azure InsightScape (Monitor and back up Azure resources)
+Design a comprehensive monitoring dashboard to gain insights, troubleshoot, and ensure smooth operations for all your previous projects. With this centralized monitoring solution, track the health, performance, and security of all integrated services.
 
-- **Programming required?**: ✅ (For crafting KQL queries)
+- **Programming required?**: ❌ (This project relies mostly on configuration and integration, though understanding of Kusto Query Language (KQL) will be essential for custom monitoring queries.)
 - **Azure Services Used:**
   - Azure Monitor
-  - Azure Metrics
   - Azure Log Analytics
+  - Azure Security Center
   - Azure Alerts
-  - Azure Network Watcher
-  - Azure Backup
-  - Azure Site Recovery
-  - Azure Resource Health
+  - Azure Application Insights (for the web applications)
+  - Azure Network Watcher (for networking projects)
   
-- **Steps:**
-   1. **Azure Monitor Setup**:
-        - Set up Azure Monitor to collect telemetry and other data from all your Azure resources involved in the previous projects.
+- **Steps**:
+   1. **Azure Monitor Integration**:
+        - Set up Azure Monitor to collect telemetry data from all your Azure resources involved in the previous projects.
+        - Enable multi-resource monitoring to see health and metrics across projects and services.
 
-   2. **Azure Metrics Configuration**:
-        - Configure Azure Metrics to keep track of performance metrics across the board. Focus on VM performance, storage access times, and network latencies.
+   2. **Log Analytics Workspace**:
+        - Provision a Log Analytics workspace in Azure Monitor.
+        - Integrate your services (like VMs, Web Apps, Logic Apps, Blob Storage) from previous projects into this workspace.
+        - Write KQL queries to fetch specific log data, e.g., failed login attempts, high resource utilization, or abnormal network traffic patterns.
 
-   3. **Azure Log Analytics Integration**:
-        - Use Azure Log Analytics to create a centralized logging solution. Ensure logs from VMs, storage accounts, and network activities are flowing into the platform.
-    
-   4. **KQL Queries Crafting**:
-        - Dive into Azure Log Analytics and use KQL to extract valuable insights.
-            - VM performance: 
-                ```kql
-                Perf
-                | where ObjectName == "Processor" and CounterName == "% Processor Time" 
-                | summarize avg(CounterValue) by bin(TimeGenerated, 5m), Computer
-                ```
-            - Failed login attempts:
-                ```kql
-                SecurityEvent 
-                | where EventID == 4625
-                ```
-            - Data transfer out from Azure blob storage:
-                ```kql
-                AzureDiagnostics
-                | where ResourceType == "BLOB" and OperationName == "GetBlob"
-                | summarize sum(by user_principal_name_s, TimeGenerated)
-                ```
-        - Use these queries (and more) to better understand the behavior, performance, and security aspects of your resources.
+   3. **Application Insights**:
+        - For the "ShareSafely - File Share Web App" project, integrate Azure Application Insights to capture telemetry data like user sessions, page views, and exceptions.
+        - Visualize the performance of your web application and identify any bottlenecks or issues.
 
-   5. **Threshold Definitions**:
-        - Define key metrics and thresholds that are relevant to each project's success. For instance, CPU and Memory utilization thresholds for VMs from "VM Fleet Commander".
+   4. **Network Monitoring**:
+        - Use Azure Network Watcher to monitor the networking aspects from the "NetMaze Explorer" project.
+        - Capture network packet data, check for any security threats, and analyze network topology.
 
-   6. **Azure Alerts Configuration**:
-        - Setup Azure Alerts based on the thresholds defined. Ensure that you get notified when any metric goes beyond the acceptable range.
+   5. **Security & Compliance**:
+        - Integrate Azure Security Center to get a unified view of the security posture across all projects.
+        - Ensure compliance standards are met and get recommendations to improve the security of your resources.
 
-   7. **Azure Network Watcher**:
-        - Use Azure Network Watcher to monitor and diagnose conditions at a network scenario level in, and out of Azure.
+   6. **Alerts Configuration**:
+        - Based on the data from Log Analytics and Application Insights, set up Azure Alerts.
+        - Configure notifications for unusual activities, like resource downtimes, security breaches, or performance degradation.
 
-   8. **Disaster Recovery Planning**:
-        - Implement Azure Backup and Azure Site Recovery for mission-critical resources, ensuring you have a disaster recovery plan in place.
+   7. **Dashboard Creation**:
+        - Customize the Azure Monitor dashboard to display critical metrics, logs, and alerts for all projects in one place.
+        - Share the dashboard with your team to ensure everyone has visibility into the system's health.
 
-   9. **Azure Resource Health Checks**:
-        - Regularly check Azure Resource Health for the status of your resources and get detailed insights when they are facing issues.
+   8. **Backup and Disaster Recovery**:
+        - Set up periodic backups for critical data across your projects.
+        - Design a disaster recovery plan, and periodically test the recovery of services to ensure data integrity and availability in case of any failures.
 
-   10. **Dashboard Creation**:
-        - Create a comprehensive dashboard in Azure Monitor, giving a visual representation of all metrics, logs, and alerts.
+   9. **Documentation & Best Practices**:
+        - Document your monitoring strategies, KQL queries, and setup configurations.
+        - Ensure you follow Azure's best practices for monitoring and alerting, optimizing costs, and resource usage.
 
-   11. **Test Scenarios**:
-        - Perform test scenarios, like simulating high load or network issues, to validate the effectiveness of your monitoring setup.
-
-   12. **Refinement**:
-        - Refine and adjust your monitoring strategy based on insights gathered over a period.
-
-   13. **Documentation**:
-        - Document best practices and learnings from this comprehensive monitoring setup.
 
 
 
