@@ -1,5 +1,7 @@
 # Projects for AZ-104
 
+[Study guide for Exam AZ-104: Microsoft Azure Administrator](https://learn.microsoft.com/certifications/resources/study-guides/az-104)
+
 ## Azure Onboard-o-Matic (Manage Azure identities and governance)
 Automate the onboarding process of new employees into the organization's Azure AD and Azure resources. This would involve creating user accounts, assigning necessary roles, and providing access to required Azure resources.
 - **Programming required?**: ❌
@@ -36,25 +38,34 @@ Design a web app where users can upload files to Azure Blob Storage and get a sh
 ---
 
 ## VM Fleet Commander (Deploy and manage Azure compute resources)
-Deploy a series of virtual machines with varying configurations, storage, and networking setups. These VMs will be scaled and balanced based on traffic/load.
+
+Launch and manage a fleet of virtual machines, simulate workloads, and monitor their performance to understand optimal configurations. This project is designed to help you understand the nuances of Azure VMs, their scalability, and the importance of correct VM size selection.
+
 - **Programming required?**: ❌
 - **Azure Services Used:**
-    - Azure Virtual Machines
-    - Azure Disk Encryption
-    - Azure Virtual Machine Scale Sets
-    - Azure Load Balancer
+  - Azure Virtual Machines
+  - Azure Virtual Machine Scale Sets
+  - Azure Monitor
+  - Azure Resource Manager (ARM) templates or Bicep files
+  - Azure Disk Encryption
 - **Steps:**
-   1. Initialize a virtual machine with the desired OS and settings.
-   2. Apply Azure Disk Encryption for VM data protection.
-   3. Design a Virtual Machine Scale Set (VMSS) to manage multiple VMs with scalability.
-   4. Implement an Azure Load Balancer to distribute incoming traffic to the VMs.
-   5. Simulate traffic to observe and test the scalability and load balancing.
+   1. Use the Azure portal to create an initial virtual machine. Select a typical configuration suitable for general-purpose tasks.
+   2. Deploy an application or software on the VM. This can be a sample web server or any lightweight application. 
+   3. Clone this VM using ARM templates or Bicep files to simulate a fleet. Make sure to adjust configurations (like VM size) for a few to understand how different configurations perform.
+   4. Deploy virtual machines to availability zones and availability sets to ensure high availability.
+   5. Implement Azure Disk Encryption on one of the VMs to understand the process and performance implications.
+   6. Setup Azure Monitor to monitor the performance, health, and metrics of each VM in the fleet.
+   7. Introduce synthetic load to the VMs using tools or scripts. Observe the performance metrics in Azure Monitor.
+   8. Use Azure Virtual Machine Scale Sets to understand auto-scaling based on the load. Adjust the load and see how Azure responds to it.
+   9. Document findings on different VM configurations, the impact of disk encryption, and the efficiency of scale sets under load.
+   10. Clean up resources after the tests to avoid unnecessary costs.
+
 
 ---
 
 ## NetMaze Explorer (Implement and manage virtual networking)
-Design a hybrid networking environment where on-premises networks connect securely to Azure resources, ensuring secure data transition and effective resource access controls.
-- **Programming required?**: ❌
+Design a hybrid networking environment where on-premises networks connect securely to Azure resources using Azure's networking capabilities, ensuring secure data transition and effective resource access controls.
+- **Programming required?**: ❌ Minimal to none. This project is largely focused on networking configurations, but understanding scripting for automating certain tasks or deploying resources could be beneficial.
 - **Azure Services Used:**
     - Azure Virtual Networks
     - Azure VPN Gateway
@@ -64,14 +75,52 @@ Design a hybrid networking environment where on-premises networks connect secure
     - Azure DNS
     - Azure Load Balancer
 - **Steps:**
-   1. Set up an Azure Virtual Network with subnets.
-   2. Create a VPN connection between a simulated on-premises network and Azure using the VPN Gateway.
-   3. Place test resources in each subnet.
-   4. Assign NSG rules for secure access between subnets.
-   5. Integrate Azure Bastion for secure, direct VM access.
-   6. Use Azure Private Link to create private connections to Azure PaaS services.
-   7. Configure Azure DNS for domain name resolution.
-   8. Implement Azure Load Balancer for distributing traffic to resources.
+
+   1. Azure Virtual Network Setup:
+
+        Provision an Azure Virtual Network (VNet) in your chosen region.
+    Create multiple subnets within this VNet to segregate resources effectively (e.g., WebApp Subnet, Database Subnet, Admin Subnet).
+
+    2. On-Premises Network Simulation:
+
+        For the sake of this project, use another VNet to simulate your on-premises environment. This can be in another Azure region or the same region based on preference.
+
+    3. Secure Connectivity:
+
+        Implement Azure VPN Gateway to create a site-to-site VPN connection between your simulated on-premises environment (VNet) and your main Azure VNet.
+    Verify the connection and ensure resources from one VNet can communicate with another, effectively simulating a hybrid environment.
+
+    4. Resource Deployment
+
+        Deploy test resources (like VMs) in each subnet of your main Azure VNet. For instance, deploy a web server VM in the WebApp Subnet, a database in the Database Subnet, etc.
+
+    5. Network Access Control:
+
+        Use Network Security Groups (NSGs) to define inbound and outbound access rules for each subnet, ensuring that only valid traffic is allowed. For instance, only allow HTTP/HTTPS traffic to the WebApp Subnet.
+
+    6. Secure Administrative Access:
+
+        Implement Azure Bastion for secure and seamless RDP and SSH access to your virtual machines, ensuring you don't expose your VMs to the public internet.
+
+    7. Private Access to Azure PaaS Services:
+
+        Use Azure Private Link to access Azure PaaS services (like Azure SQL Database) over a private endpoint within your VNet, ensuring data doesn't traverse over the public internet.
+
+    8. DNS and Load Balancing:
+
+        Configure Azure DNS to have custom domain names for your resources.
+    Implement Azure Load Balancer to distribute traffic across your VMs in the WebApp Subnet.
+
+    9. Performance and Security Testing:
+
+        Simulate various network scenarios to test performance, such as data transition between on-premises and Azure.
+    Attempt to access resources from outside the permitted paths to validate the security configurations in place.
+
+    10. Monitoring and Auditing:
+
+        Enable monitoring and diagnostics on your VPN Gateway, NSGs, and other network resources to gain insights into network operations.
+    Review logs and set up alerts for any suspicious activities.
+
 
 ---
 
