@@ -125,25 +125,76 @@ Design a hybrid networking environment where on-premises networks connect secure
 ---
 
 ## Azure InsightScape (Monitor and maintain Azure resources)
-Establish a monitoring and backup solution to oversee the health, performance, and resilience of your Azure environment.
-- **Programming required?**: ❌
+Get a complete picture of your Azure environment by setting up a comprehensive monitoring and alerting system. This project will centralize the monitoring of all your previous projects, providing a holistic view of resources, performance metrics, alerts, and health statuses.
+
+- **Programming required?**: ✅ (For crafting KQL queries)
 - **Azure Services Used:**
-    - Azure Monitor
-    - Azure Alerts
-    - Azure Backup
-    - Azure Site Recovery
-    - Azure Network Watcher
-    - Azure Advisor
-    - Azure Log Analytics
+  - Azure Monitor
+  - Azure Metrics
+  - Azure Log Analytics
+  - Azure Alerts
+  - Azure Network Watcher
+  - Azure Backup
+  - Azure Site Recovery
+  - Azure Resource Health
+  
 - **Steps:**
-   1. Set up foundational Azure resources.
-   2. Configure Azure Monitor for real-time metrics.
-   3. Establish a Log Analytics workspace for in-depth data inspection.
-   4. Define specific alerts using Azure Alerts.
-   5. Integrate Azure Network Watcher for network insights.
-   6. Create backup policies and implement Azure Backup.
-   7. Design disaster recovery strategies using Azure Site Recovery.
-   8. Test recovery methods and disaster response.
-   9. Gain insights from Azure Advisor for optimization.
-   10. Customize Azure Monitor dashboards for at-a-glance resource health.
+   1. **Azure Monitor Setup**:
+        - Set up Azure Monitor to collect telemetry and other data from all your Azure resources involved in the previous projects.
+
+   2. **Azure Metrics Configuration**:
+        - Configure Azure Metrics to keep track of performance metrics across the board. Focus on VM performance, storage access times, and network latencies.
+
+   3. **Azure Log Analytics Integration**:
+        - Use Azure Log Analytics to create a centralized logging solution. Ensure logs from VMs, storage accounts, and network activities are flowing into the platform.
+    
+   4. **KQL Queries Crafting**:
+        - Dive into Azure Log Analytics and use KQL to extract valuable insights.
+            - VM performance: 
+                ```kql
+                Perf
+                | where ObjectName == "Processor" and CounterName == "% Processor Time" 
+                | summarize avg(CounterValue) by bin(TimeGenerated, 5m), Computer
+                ```
+            - Failed login attempts:
+                ```kql
+                SecurityEvent 
+                | where EventID == 4625
+                ```
+            - Data transfer out from Azure blob storage:
+                ```kql
+                AzureDiagnostics
+                | where ResourceType == "BLOB" and OperationName == "GetBlob"
+                | summarize sum(by user_principal_name_s, TimeGenerated)
+                ```
+        - Use these queries (and more) to better understand the behavior, performance, and security aspects of your resources.
+
+   5. **Threshold Definitions**:
+        - Define key metrics and thresholds that are relevant to each project's success. For instance, CPU and Memory utilization thresholds for VMs from "VM Fleet Commander".
+
+   6. **Azure Alerts Configuration**:
+        - Setup Azure Alerts based on the thresholds defined. Ensure that you get notified when any metric goes beyond the acceptable range.
+
+   7. **Azure Network Watcher**:
+        - Use Azure Network Watcher to monitor and diagnose conditions at a network scenario level in, and out of Azure.
+
+   8. **Disaster Recovery Planning**:
+        - Implement Azure Backup and Azure Site Recovery for mission-critical resources, ensuring you have a disaster recovery plan in place.
+
+   9. **Azure Resource Health Checks**:
+        - Regularly check Azure Resource Health for the status of your resources and get detailed insights when they are facing issues.
+
+   10. **Dashboard Creation**:
+        - Create a comprehensive dashboard in Azure Monitor, giving a visual representation of all metrics, logs, and alerts.
+
+   11. **Test Scenarios**:
+        - Perform test scenarios, like simulating high load or network issues, to validate the effectiveness of your monitoring setup.
+
+   12. **Refinement**:
+        - Refine and adjust your monitoring strategy based on insights gathered over a period.
+
+   13. **Documentation**:
+        - Document best practices and learnings from this comprehensive monitoring setup.
+
+
 
