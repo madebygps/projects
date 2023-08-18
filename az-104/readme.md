@@ -84,7 +84,7 @@ Create a web application where users can securely upload files to Azure Blob Sto
 
 ---
 
-## VM Fleet Commander (Manage Azure governance and resources)
+## VM Fleet Commander (Deploy and manage Azure compute resources)
 Implement an infrastructure-as-code approach to provision and manage virtual machines in Azure, using ARM templates and Bicep. The aim is to gain hands-on experience in automating the deployment of Azure resources and organizing them efficiently.
 
 - **Programming required?**: ✅ (Knowledge of JSON for ARM templates and Bicep language syntax is essential.)
