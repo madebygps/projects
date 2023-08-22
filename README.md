@@ -6,3 +6,4 @@
 | Certification | Link |
 |---------------|------|
 | AZ-104        | [Projects](az-104/readme.md) |
+| AZ-204        | [Projects](az-204/readme.md) |
