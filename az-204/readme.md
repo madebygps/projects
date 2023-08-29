@@ -101,15 +101,32 @@ A secure platform where users can upload important documents, assign tags for ea
 
 ### Diagram 
 
-```
-[Users]
-  |
-  V
-[Document Upload, Tagging, and Link Generation Portal]
-  |    /        \         |
-  |   /          \        |
-  V  V            V       V
-[Azure Blob Storage]--[Azure CDN]--[Azure Cosmos DB]--[Azure Functions]
+```mermaid
+flowchart TD
+
+subgraph Users
+  click Users "User Interaction"
+end
+
+Users --> Portal
+Portal -->|Document Upload| Storage
+Portal -->|Tagging| CosmosDB
+Portal -->|Link Generation| Functions
+Storage --> CDN
+CDN --> CosmosDB
+CosmosDB --> Functions
+
+classDef azure fill:#0089D6,stroke:#000000,color:#FFFFFF;
+classDef portal fill:#5C85FB,stroke:#000000,color:#FFFFFF;
+classDef storage fill:#00A4EF,stroke:#000000,color:#FFFFFF;
+classDef cdn fill:#00B294,stroke:#000000,color:#FFFFFF;
+classDef functions fill:#FF8C00,stroke:#000000,color:#FFFFFF;
+
+class Users,Portal azure;
+class Storage storage;
+class CDN cdn;
+class CosmosDB azure;
+class Functions functions;
 ```
 
 ### Implementation Guide
