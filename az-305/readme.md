@@ -1,6 +1,6 @@
 # Azure AZ-305 
 
-[![Video Name](https://img.youtube.com/vi/SRWMfO-q9dc/maxresdefault.jpg)](https://www.youtube.com/watch?v=SRWMfO-q9dc)
+[![Video Name](https://img.youtube.com/vi/SRWMfO-q9dc/hqdefault.jpg)](https://www.youtube.com/watch?v=SRWMfO-q9dc)
 
 [Study guide for Exam AZ-305: Designing Microsoft Azure Infrastructure Solutions](https://learn.microsoft.com/certifications/resources/study-guides/az-305)
 
