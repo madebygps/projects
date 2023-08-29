@@ -56,15 +56,23 @@ A web application that allows users to track weather updates in real-time for th
 
 ### Diagram
 
-```
-User 
-|-> Web Application (Hosted on Azure App Service Web App)
-   |-> Weather Alerts (Azure Functions)
-      |-> Docker Images (Azure Container Registry)
-         |-> Testing Containers (Azure Container Instance)
-            |-> Running Containers (Azure Container Apps)
-```
+```mermaid
+sequenceDiagram
+    participant User
+    participant WebApp as Web Application
+    participant AlertsFunc as Weather Alerts
+    participant DockerRegistry as Azure Container Registry
+    participant TestContainers as Testing Containers
+    participant RunningContainers as Running Containers
 
+    User->>WebApp: Access Application
+    WebApp->>AlertsFunc: Process Request
+    AlertsFunc->>DockerRegistry: Retrieve Image
+    DockerRegistry->>TestContainers: Deploy Container
+    TestContainers->>RunningContainers: Start Container
+
+```
+---
 
 ### Implementation Guide 
 1. Create an Azure App Service Web App.
