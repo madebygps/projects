@@ -1,6 +1,6 @@
 # Projects for AZ-204
 
-[![Video Name](https://img.youtube.com/vi/Ny5SZcV7mbE/maxresdefault.jpg)](https://youtu.be/Ny5SZcV7mbE)
+[![Video Name](https://img.youtube.com/vi/Ny5SZcV7mbE/hqdefault.jpg)](https://youtu.be/Ny5SZcV7mbE)
 
 [Study guide for Exam AZ-204: Developing Solutions on Microsoft Azure](https://learn.microsoft.com/certifications/resources/study-guides/az-204)
 
