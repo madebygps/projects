@@ -173,11 +173,34 @@ A web application that displays secret notes from Azure Keyvault only when the u
 
 ### Diagram
 
-```
-User 
-|-> Login Portal (Hosted on Azure App Service)
-   |-> User Authentication (Microsoft Azure Active Directory)
-   |-> Configuration Data (Azure Key Vault)
+```mermaid
+flowchart LR
+
+subgraph "User"
+  click User "User"
+end
+
+
+User --> Portal
+Portal --> Authentication
+Portal --> Configuration
+Authentication --> AAD
+Configuration --> KeyVault
+Portal --> AppService
+
+
+classDef userClass fill:#FFD700,stroke:#000000,color:#000000;
+classDef portalClass fill:#87CEEB,stroke:#000000,color:#000000;
+classDef aadClass fill:#0089D6,stroke:#000000,color:#FFFFFF;
+classDef kvClass fill:#00A4EF,stroke:#000000,color:#FFFFFF;
+classDef appServiceClass fill:#009900,stroke:#000000,color:#FFFFFF;
+
+class User userClass;
+class Portal portalClass;
+class Authentication aadClass;
+class Configuration kvClass;
+class AppService appServiceClass;
+
 ```
 
 ### Implementation Guide
