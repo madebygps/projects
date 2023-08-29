@@ -233,21 +233,32 @@ An event-driven bookstore application that notifies subscribers when a new book 
 
 ### Diagram 
 
+```mermaid
+flowchart TD
+
+Bookstore --> APIM
+APIM --> CosmosDB
+APIM --> EventGrid
+CosmosDB --> ServiceBus
+EventGrid --> ServiceBus
+ServiceBus --> Subscribers
+
+classDef bookstore fill:#5C85FB,stroke:#000000,color:#FFFFFF;
+classDef apim fill:#0089D6,stroke:#000000,color:#FFFFFF;
+classDef cosmosdb fill:#00A4EF,stroke:#000000,color:#FFFFFF;
+classDef eventgrid fill:#0078D4,stroke:#000000,color:#FFFFFF;
+classDef servicebus fill:#FF8C00,stroke:#000000,color:#FFFFFF;
+classDef subscribers fill:#00B294,stroke:#000000,color:#FFFFFF;
+
+class Bookstore bookstore;
+class APIM apim;
+class CosmosDB cosmosdb;
+class EventGrid eventgrid;
+class ServiceBus servicebus;
+class Subscribers subscribers;
+
 ```
-[Bookstore Application]
-      |
-      V
-[Azure API Management (APIM)]
-      |
-      V
-[Azure Cosmos DB] <--> [Azure Event Grid]
-      |
-      V
-[Azure Service Bus]
-      |
-      V
-[Subscriber Devices]
-```
+---
 
 ### Implementation Guide
 
