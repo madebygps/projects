@@ -1,6 +1,6 @@
 # Projects for AZ-400
 
-[![Video Name]()]()
+[![AZ-400 Projects](https://img.youtube.com/vi/Ej5NqFApUmc/sddefault.jpg)](https://youtu.be/Ej5NqFApUmc)
 
 [Study guide for Exam AZ-400: Designing and Implementing Microsoft DevOps Solutions](https://learn.microsoft.com/certifications/resources/study-guides/az-400)
 
@@ -159,7 +159,7 @@ The diagram will consist of multiple stages representing code building, automate
 
 ### Programming required?: ✅
 
-### Azure Services Used: 
+### Azure Services Used
 
 - Azure Pipelines
 - Azure Repos or GitHub
@@ -237,7 +237,7 @@ The diagram will consist of multiple components such as Source Control, Azure Pi
 - Azure Key Vault
 - Azure Monitor
 
-### Steps:
+### Steps
 
 1.  Initial Setup:
 
@@ -299,7 +299,7 @@ The diagram should include the application, Azure Pipelines, Azure Monitor, and 
 - Azure Application Insights
 - Azure Pipelines
 
-### Steps:
+### Steps
 
 1.  Initial Setup:
 
