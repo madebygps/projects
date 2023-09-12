@@ -56,15 +56,23 @@ A web application that allows users to track weather updates in real-time for th
 
 ### Diagram
 
-```
-User 
-|-> Web Application (Hosted on Azure App Service Web App)
-   |-> Weather Alerts (Azure Functions)
-      |-> Docker Images (Azure Container Registry)
-         |-> Testing Containers (Azure Container Instance)
-            |-> Running Containers (Azure Container Apps)
-```
+```mermaid
+sequenceDiagram
+    participant User
+    participant WebApp as Web Application
+    participant AlertsFunc as Weather Alerts
+    participant DockerRegistry as Azure Container Registry
+    participant TestContainers as Testing Containers
+    participant RunningContainers as Running Containers
 
+    User->>WebApp: Access Application
+    WebApp->>AlertsFunc: Process Request
+    AlertsFunc->>DockerRegistry: Retrieve Image
+    DockerRegistry->>TestContainers: Deploy Container
+    TestContainers->>RunningContainers: Start Container
+
+```
+---
 
 ### Implementation Guide 
 1. Create an Azure App Service Web App.
@@ -93,15 +101,32 @@ A secure platform where users can upload important documents, assign tags for ea
 
 ### Diagram 
 
-```
-[Users]
-  |
-  V
-[Document Upload, Tagging, and Link Generation Portal]
-  |    /        \         |
-  |   /          \        |
-  V  V            V       V
-[Azure Blob Storage]--[Azure CDN]--[Azure Cosmos DB]--[Azure Functions]
+```mermaid
+flowchart TD
+
+subgraph Users
+  click Users "User Interaction"
+end
+
+Users --> Portal
+Portal -->|Document Upload| Storage
+Portal -->|Tagging| CosmosDB
+Portal -->|Link Generation| Functions
+Storage --> CDN
+CDN --> CosmosDB
+CosmosDB --> Functions
+
+classDef azure fill:#0089D6,stroke:#000000,color:#FFFFFF;
+classDef portal fill:#5C85FB,stroke:#000000,color:#FFFFFF;
+classDef storage fill:#00A4EF,stroke:#000000,color:#FFFFFF;
+classDef cdn fill:#00B294,stroke:#000000,color:#FFFFFF;
+classDef functions fill:#FF8C00,stroke:#000000,color:#FFFFFF;
+
+class Users,Portal azure;
+class Storage storage;
+class CDN cdn;
+class CosmosDB azure;
+class Functions functions;
 ```
 
 ### Implementation Guide
@@ -148,11 +173,34 @@ A web application that displays secret notes from Azure Keyvault only when the u
 
 ### Diagram
 
-```
-User 
-|-> Login Portal (Hosted on Azure App Service)
-   |-> User Authentication (Microsoft Azure Active Directory)
-   |-> Configuration Data (Azure Key Vault)
+```mermaid
+flowchart LR
+
+subgraph "User"
+  click User "User"
+end
+
+
+User --> Portal
+Portal --> Authentication
+Portal --> Configuration
+Authentication --> AAD
+Configuration --> KeyVault
+Portal --> AppService
+
+
+classDef userClass fill:#FFD700,stroke:#000000,color:#000000;
+classDef portalClass fill:#87CEEB,stroke:#000000,color:#000000;
+classDef aadClass fill:#0089D6,stroke:#000000,color:#FFFFFF;
+classDef kvClass fill:#00A4EF,stroke:#000000,color:#FFFFFF;
+classDef appServiceClass fill:#009900,stroke:#000000,color:#FFFFFF;
+
+class User userClass;
+class Portal portalClass;
+class Authentication aadClass;
+class Configuration kvClass;
+class AppService appServiceClass;
+
 ```
 
 ### Implementation Guide
@@ -185,21 +233,32 @@ An event-driven bookstore application that notifies subscribers when a new book 
 
 ### Diagram 
 
+```mermaid
+flowchart TD
+
+Bookstore --> APIM
+APIM --> CosmosDB
+APIM --> EventGrid
+CosmosDB --> ServiceBus
+EventGrid --> ServiceBus
+ServiceBus --> Subscribers
+
+classDef bookstore fill:#5C85FB,stroke:#000000,color:#FFFFFF;
+classDef apim fill:#0089D6,stroke:#000000,color:#FFFFFF;
+classDef cosmosdb fill:#00A4EF,stroke:#000000,color:#FFFFFF;
+classDef eventgrid fill:#0078D4,stroke:#000000,color:#FFFFFF;
+classDef servicebus fill:#FF8C00,stroke:#000000,color:#FFFFFF;
+classDef subscribers fill:#00B294,stroke:#000000,color:#FFFFFF;
+
+class Bookstore bookstore;
+class APIM apim;
+class CosmosDB cosmosdb;
+class EventGrid eventgrid;
+class ServiceBus servicebus;
+class Subscribers subscribers;
+
 ```
-[Bookstore Application]
-      |
-      V
-[Azure API Management (APIM)]
-      |
-      V
-[Azure Cosmos DB] <--> [Azure Event Grid]
-      |
-      V
-[Azure Service Bus]
-      |
-      V
-[Subscriber Devices]
-```
+---
 
 ### Implementation Guide
 
