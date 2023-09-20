@@ -1,7 +1,5 @@
 # AZ-104
 
-[![Video Name](https://img.youtube.com/vi/Qd0YI9ZMHHs/hqdefault.jpg)](https://youtu.be/Qd0YI9ZMHHs)
-
 [Study guide for Exam AZ-104: Microsoft Azure Administrator](https://learn.microsoft.com/certifications/resources/study-guides/az-104)
 
 ## Projects
