@@ -1,3 +1,9 @@
+# Project based certification study guide
+
+This project was forked from https://github.com/madebygps/projects.
+
+Thank you Gwyneth Peña-Siguenza!
+
 # AZ-104
 
 [Study guide for Exam AZ-104: Microsoft Azure Administrator](https://learn.microsoft.com/certifications/resources/study-guides/az-104)
