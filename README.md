@@ -1,6 +1,6 @@
 # Certification based projects
 
-[![Video Name](https://img.youtube.com/vi/3GPMaizoZe8/hqdefault.jpg)](https://www.youtube.com/watch?v=3GPMaizoZe8)
+[how to best use certifications and projects to learn](https://www.youtube.com/watch?v=3GPMaizoZe8)
 
 | Certification | Link |
 |---------------|------|
